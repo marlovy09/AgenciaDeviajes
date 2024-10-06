@@ -1,0 +1,62 @@
+Proceso AgenciaDeViajes
+
+    Definir destinoComoTexto, continuarComoTexto Como Caracter
+    Definir costoPorDia, totalSinDescuento, totalConDescuento, dias Como Real
+    
+    continuarComoTexto <- "si" // Inicializamos 
+    
+    Mientras continuarComoTexto = "si"
+        // Presentar opciones de destinos
+        Escribir "Bienvenido a la Agencia de Viajes. Selecciona tu destino:"
+        Escribir "1. Playa ($500.000 por día)"
+        Escribir "2. Montaña ($400.000 por día)"
+        Escribir "3. Ciudad ($300.000 por día)"
+        Leer opcion
+        
+        // Asignar costo por día según el destino seleccionado
+        Segun opcion Hacer
+            1: 
+                destinoComoTexto <- "Playa"
+                costoPorDia <- 500000
+            2: 
+                destinoComoTexto <- "Montaña"
+                costoPorDia <- 400000
+            3: 
+                destinoComoTexto <- "Ciudad"
+                costoPorDia <- 300000
+            De Otro Modo:
+                Escribir "Opción no válida. Por favor, selecciona un destino válido."
+                ContinuarProceso
+        FinSegun
+        
+        // Ingreso de cantidad de días de estancia
+        Escribir "Has seleccionado ", destinoComoTexto, ". Ingresa la cantidad de días que planeas quedarte:"
+        Leer dias
+        
+        // Cálculo del costo total sin descuento
+        totalSinDescuento <- costoPorDia * dias
+        
+        // Aplicación de descuentos
+        Si dias >= 7 Entonces
+            totalConDescuento <- totalSinDescuento * 0.85 // 15% de descuento
+        SinoSi dias >= 3 Entonces
+            totalConDescuento <- totalSinDescuento * 0.90 // 10% de descuento
+        Sino
+            totalConDescuento <- totalSinDescuento // Sin descuento
+        FinSi
+        
+        // Mostrar el resumen del costo total
+        Escribir "Destino: ", destinoComoTexto
+        Escribir "Días de estancia: ", dias
+        Escribir "Costo total sin descuento: $", totalSinDescuento
+        Escribir "Costo total con descuento: $", totalConDescuento
+        
+        // Preguntar si desea realizar otra reserva
+        Escribir "¿Deseas realizar otra reserva? (si/no)"
+        Leer continuarComoTexto
+    
+    FinMientras
+
+    Escribir "Gracias por utilizar nuestra Agencia de Viajes."
+    
+FinProceso
